@@ -37,6 +37,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.5
+  google_fonts: ^3.0.1
+  simple_gradient_text: ^1.2.3
+  gradient_borders: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +66,9 @@ flutter:
 
   assets:
    - asstes/mountains-layer-4.svg
+   - asstes/mountains-layer-2.svg
+   - asstes/trees-layer-2.svg
+   - asstes/layer-1.svg
 
 
   # To add assets to your application, add an assets section, like this:

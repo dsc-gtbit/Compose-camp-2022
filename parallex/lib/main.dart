@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'parallex.dart';
 
@@ -15,6 +16,9 @@ class para extends StatefulWidget {
 class _paraState extends State<para> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: parallex());
+    return CupertinoApp(
+      debugShowCheckedModeBanner: false,
+      home: parallex(),
+    );
   }
 }

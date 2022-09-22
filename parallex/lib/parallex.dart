@@ -1,5 +1,9 @@
+import 'dart:ui';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class parallex extends StatefulWidget {
   const parallex({super.key});
@@ -32,7 +36,7 @@ class _parallexState extends State<parallex> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var eigt = size.height * 3;
+    var eigt = size.height * 2;
 
     return Scaffold(
       body: Container(
@@ -41,8 +45,8 @@ class _parallexState extends State<parallex> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Color.fromARGB(255, 0, 200, 100),
-              Color.fromARGB(255, 255, 255, 255)
+              Color.fromARGB(255, 23, 113, 82),
+              Color.fromARGB(255, 147, 249, 185)
             ])),
         child: Stack(children: [
           Positioned(
@@ -69,9 +73,50 @@ class _parallexState extends State<parallex> {
             top: size.height + (offset * -1 * 1),
             right: 0,
             left: 0,
-            height: size.height * 2,
+            height: size.height * 1.5,
             child: Container(
               color: Colors.black,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    width: 275,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: GradientBoxBorder(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 23, 113, 82),
+                            Color.fromARGB(255, 147, 249, 185)
+                          ],
+                        ),
+                        width: 5,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: GradientText(
+                        "GDSC - GTBIT",
+                        overflow: TextOverflow.fade,
+                        style: GoogleFonts.josefinSans(
+                            color: Colors.white,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1),
+                        colors: [
+                          Color.fromARGB(255, 29, 151, 108),
+                          // Color.fromARGB(255, 0, 130, 200),
+                          // Color.fromARGB(255, 0, 130, 200),
+                          Color.fromARGB(255, 147, 249, 185)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned.fill(
