@@ -1,5 +1,6 @@
 package com.example.bmicalculator
 
+import androidx.compose.ui.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,11 +8,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,9 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bmicalculator.ui.theme.BMICalculatorTheme
-
-
-
 
 
 class MainActivity : ComponentActivity() {
@@ -97,7 +98,8 @@ fun mainScreen() {
             fontSize = 30.sp, fontWeight = FontWeight.Bold
         )
         TextField(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
+
             value = height,
             onValueChange = { height = it },
             label = {
@@ -108,7 +110,7 @@ fun mainScreen() {
         )
 
         TextField(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
             value = weight,
             onValueChange = { weight = it },
             label = {
@@ -128,27 +130,27 @@ fun mainScreen() {
 
         }
 
+            if (result.isNotBlank()) {
+                Text(
+                    text = result,
+                    color = Color.Magenta
+                )
+            }
 
-        if (result.isNotBlank()) {
-            Text(text = result)
         }
 
     }
 
-}
+    private fun calculateBmi(height: Double, weight: Double): String {
+        val bmiIndex = weight / (height * height)
+        return "Result: $bmiIndex"
+    }
 
-private fun calculateBmi(height: Double, weight: Double): String {
-    val bmiIndex = weight / (height * height)
-    return "Result: $bmiIndex"
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    BMICalculatorTheme {
-        mainScreen()
-       }
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        BMICalculatorTheme {
+            mainScreen()
+        }
     }
 
