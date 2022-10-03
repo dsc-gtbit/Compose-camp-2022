@@ -1,8 +1,10 @@
 package com.example.bmicalculator
 
+import androidx.compose.ui.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +14,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,7 +59,8 @@ fun mainScreen() {
         Text(text = "BMI CALCULATOR",
             fontSize = 30.sp)
         TextField(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
+
             value = height,
             onValueChange = { height = it },
             label = {
@@ -67,7 +71,7 @@ fun mainScreen() {
         )
 
         TextField(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
             value = weight,
             onValueChange = { weight = it },
             label = {
@@ -86,7 +90,8 @@ fun mainScreen() {
         }
 
         if(result.isNotBlank()) {
-            Text(text = result)
+            Text(text = result,
+                color = Color.Magenta)
         }
 
     }
