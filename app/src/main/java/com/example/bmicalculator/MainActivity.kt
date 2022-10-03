@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.bmicalculator.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +53,8 @@ fun mainScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
         ) {
-        Text(text = "BMI CALCULATOR")
+        Text(text = "BMI CALCULATOR",
+            fontSize = 30.sp)
         TextField(
             modifier = Modifier.padding(15.dp),
             value = height,
