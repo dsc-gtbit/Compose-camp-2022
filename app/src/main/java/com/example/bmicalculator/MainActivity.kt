@@ -3,22 +3,32 @@ package com.example.bmicalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bmicalculator.ui.theme.BMICalculatorTheme
 
+
+
+
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,6 +42,34 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+
+@Composable
+fun PressIconButton(
+
+    onClick: () -> Unit,
+    icon: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource =
+        remember { MutableInteractionSource() },
+    text: @Composable () -> Unit,
+) {
+    val isPressed by interactionSource.collectIsPressedAsState()
+    Button(
+        onClick = onClick, modifier = modifier,
+        interactionSource = interactionSource
+    ) {
+        AnimatedVisibility(visible = isPressed) {
+            if (isPressed) {
+                Row {
+                    icon()
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                }
+            }
+        }
+text()
     }
 }
 
@@ -49,12 +87,15 @@ fun mainScreen() {
         mutableStateOf("")
     }
 
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-        ) {
-        Text(text = "BMI CALCULATOR",
-            fontSize = 30.sp)
+    ) {
+        Text(
+            text = "BMI CALCULATOR",
+            fontSize = 30.sp, fontWeight = FontWeight.Bold
+        )
         TextField(
             modifier = Modifier.padding(15.dp),
             value = height,
@@ -76,20 +117,24 @@ fun mainScreen() {
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Button(
+        PressIconButton(
             onClick = {
-                      result = calculateBmi(height.toDouble(), weight.toDouble())
+                result = calculateBmi(height.toDouble(), weight.toDouble())
             },
-            modifier = Modifier.padding(10.dp)
+            icon = { Icon(Icons.Rounded.PlayArrow, contentDescription = null) }
         ) {
-            Text(text = "Calculate")
+            Text("Calculate")
+
+
         }
 
-        if(result.isNotBlank()) {
+
+        if (result.isNotBlank()) {
             Text(text = result)
         }
 
     }
+
 }
 
 private fun calculateBmi(height: Double, weight: Double): String {
@@ -97,10 +142,13 @@ private fun calculateBmi(height: Double, weight: Double): String {
     return "Result: $bmiIndex"
 }
 
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     BMICalculatorTheme {
         mainScreen()
+       }
     }
-}
+
