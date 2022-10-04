@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.Down
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -46,6 +48,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     mainScreen()
+                    imagech()
                 }
             }
         }
@@ -104,7 +107,9 @@ fun mainScreen() {
             fontSize = 30.sp)
 
         TextField(
-            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
+            modifier = Modifier
+                .padding(15.dp)
+                .background(color = Color.Cyan),
 
             value = height,
             onValueChange = { height = it },
@@ -119,7 +124,9 @@ fun mainScreen() {
         )
 
         TextField(
-            modifier = Modifier.padding(15.dp).background(color = Color.Cyan),
+            modifier = Modifier
+                .padding(15.dp)
+                .background(color = Color.Cyan),
             value = weight,
             onValueChange = { weight = it },
             label = {
@@ -156,12 +163,40 @@ fun mainScreen() {
         val bmiIndex = weight / (height * height)
         return "Result: $bmiIndex"
     }
+@Composable
+fun bmichart() {
+    val image = painterResource(R.drawable.chart)
+
+
+
+    Image(
+        painter = image,
+        contentDescription = null,
+        modifier = Modifier
+            .padding(16.dp)
+            .width(200.dp)
+            .height(200.dp)
+    )
+
+
+}
+@Composable
+fun imagech(){
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+    ) {bmichart()
+
+    }
+}
+
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
         BMICalculatorTheme {
             mainScreen()
+            imagech()
         }
     }
 
