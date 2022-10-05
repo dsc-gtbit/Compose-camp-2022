@@ -1,5 +1,6 @@
 package com.example.bmicalculator
 
+import android.graphics.Color.parseColor
 import androidx.compose.ui.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -38,6 +39,9 @@ import com.example.bmicalculator.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {
 
+    val String.color
+        get()=Color(parseColor(this))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -45,7 +49,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = "#d0a3ff".color
                 ) {
                     mainScreen()
                     imagech()
@@ -103,13 +107,13 @@ fun mainScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
         ) {
-        Text(text = "BMI CALCULATOR", color = Color.Blue, fontWeight = FontWeight.Bold ,
+        Text(modifier = Modifier.padding(20.dp),text = "BMI CALCULATOR", color = Color.Blue, fontWeight = FontWeight.Bold ,
             fontSize = 30.sp)
 
         TextField(
             modifier = Modifier
-                .padding(15.dp)
-                .background(color = Color.Cyan),
+                .padding(20.dp)
+                .background(color = Color.Transparent),
 
             value = height,
             onValueChange = { height = it },
@@ -126,7 +130,7 @@ fun mainScreen() {
         TextField(
             modifier = Modifier
                 .padding(15.dp)
-                .background(color = Color.Cyan),
+                .background(color = Color.Transparent),
             value = weight,
             onValueChange = { weight = it },
             label = {
@@ -174,7 +178,7 @@ fun bmichart() {
         contentDescription = null,
         modifier = Modifier
             .padding(16.dp)
-            .width(200.dp)
+            .width(400.dp)
             .height(200.dp)
     )
 
